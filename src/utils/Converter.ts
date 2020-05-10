@@ -1,6 +1,6 @@
 
 export default class Converter {
-    
+
     static dec2hexString(dec) {
         // source: https://gist.github.com/agirorn/0e740d012b620968225de58859ccef5c
         return '0x' + (dec + 0x10000).toString(16).substr(-4);
@@ -10,7 +10,7 @@ export default class Converter {
         let b1 = new Uint8Array(a1)
         let b2 = new Uint8Array(a2)
         let b = new Uint8Array(b1.byteLength + b2.byteLength);
-        
+
         b.set(b1, 0);
         b.set(b2, b1.byteLength);
         return b.buffer;
@@ -26,6 +26,10 @@ export default class Converter {
 
 
     static formatYYYYMMDD(dt: Date) {
-        return `${dt.getFullYear()}-${padStart(dt.getMonth()+1, 2, '0')}-${padStart(dt.getDate(), 2, '0')}`;
+        let m = dt.getMonth()+1;
+        let ms = (m > 9 ? '' : '0') + m.toString();
+        let d = dt.getDate();
+        let ds = (d > 9 ? '' : '0') + d.toString();
+        return `${dt.getFullYear()}-${ms}-${ds}`;
     }
 }
